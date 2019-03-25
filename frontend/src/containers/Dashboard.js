@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
-import { getUserProfile } from "../actions/index";
+import { getUserProfile, logoutUser } from "../actions/index";
 import DashboardComponent from '../components/Dashboard';
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserProfile: () => dispatch(getUserProfile())
+    getUserProfile: () => dispatch(getUserProfile()),
+    logoutUser: () => dispatch(logoutUser())
   };
 };
 

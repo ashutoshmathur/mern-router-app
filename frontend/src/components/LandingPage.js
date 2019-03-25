@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getValueFromLocalStore } from "../utils/localStore";
 
 export default class LandingPage extends Component {
   constructor(props) {
@@ -8,7 +9,11 @@ export default class LandingPage extends Component {
 
   componentDidMount() {
     console.log("\n landing page componentDidMount, props: ", this.props);
-    this.props.getUserProfile();
+    const currentUser = getValueFromLocalStore('user');
+    console.log("\n\n currentUser:   ", currentUser);
+    if(currentUser) {
+      this.props.getUserProfile();
+    }
   }
 
   onLoginBtnClick = (event) => {

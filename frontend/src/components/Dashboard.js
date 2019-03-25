@@ -13,11 +13,7 @@ export default class LandingPage extends Component {
   
   onLogoutBtnClick = (event) => {
     event.preventDefault();
-    // const location = {
-    //   pathname: '/login',
-    //   state: {}
-    // }
-    // this.props.history.push(location);
+    this.props.logoutUser();
   }
 
   render() {

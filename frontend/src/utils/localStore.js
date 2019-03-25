@@ -7,3 +7,7 @@ export function setValueInLocalStore(keyName, value) {
 export function getValueFromLocalStore(keyName) {
     return JSON.parse(localStorage.getItem(keyName));
 }
+
+export function deleteValueFromLocalStore(keyName) {
+    localStorage.removeItem(keyName);
+}
