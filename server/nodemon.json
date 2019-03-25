@@ -1,0 +1,8 @@
+{
+    "env": {
+        "PORT": "4000",
+        "MONGODB_ATLAS_USER_NAME": "",
+        "MONGODB_ATLAS_PWD": "",
+        "JWT_KEY": ""
+    }
+}
