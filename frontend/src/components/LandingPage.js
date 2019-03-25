@@ -37,13 +37,25 @@ export default class LandingPage extends Component {
   render() {
     console.log("\n landing page props:  ", this.props);
     return (
-      <div>
-        <h3>Welcome</h3>
-        <br/>
-        <button onClick={this.onLoginBtnClick}>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+      }}>
+        <h1>Welcome</h1>
+        <button 
+        style={{
+          width: 200
+        }}
+        onClick={this.onLoginBtnClick}>
             Login
         </button>
-        <button onClick={this.onRegisterBtnClick}>
+        <button 
+        style={{
+          width: 200
+        }}
+        onClick={this.onRegisterBtnClick}>
             Register
         </button>
       </div>

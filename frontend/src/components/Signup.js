@@ -25,41 +25,54 @@ export default class Signup extends Component {
     console.log("signup props:  " , this.props);
     const { email, password, first_name, last_name } = this.state;
     return (
-      <div id="signup">
+      <div 
+      id="signup" 
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
         <h3>Signup</h3>
-        <br/>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="title">email</label>
+          <div className="container">
+            <label htmlFor="title">Email</label>
             <input
               type="text"
               id="email"
+              placeholder="Enter Email"
               value={email}
               onChange={this.handleChange}
+              required
             />
             <br/>
-            <label htmlFor="title">password</label>
+            <label htmlFor="title">Password</label>
             <input
               type="password"
               id="password"
+              placeholder="Enter Password"
               value={password}
               onChange={this.handleChange}
+              required
             />
             <br/>
             <label htmlFor="title">First Name</label>
             <input
               type="text"
               id="first_name"
+              placeholder="Enter First Name"
               value={first_name}
               onChange={this.handleChange}
+              required
             />
             <br/>
             <label htmlFor="title">Last Name</label>
             <input
               type="text"
               id="last_name"
+              placeholder="Enter Last Name"
               value={last_name}
               onChange={this.handleChange}
+              required
             />
           </div>
           <button type="submit" className="btn btn-success btn-lg">

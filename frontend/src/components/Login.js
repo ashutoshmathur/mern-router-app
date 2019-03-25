@@ -28,32 +28,36 @@ export default class Login extends Component {
     console.log("login props:  " , this.props);
     const { email, password } = this.state;
     return (
-      <div>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
         <h3>Login</h3>
-        <br/>
+        
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="title">email</label>
-            <input
-              type="text"
-              className="form-control"
+          <div className="container">
+          <label htmlFor="title">Email</label>
+            <input 
+              type="text" 
+              placeholder="Enter Email"
               id="email"
               value={email}
-              onChange={this.handleChange}
-            />
-            <br/>
-            <label htmlFor="title">password</label>
-            <input
-              type="password"
-              className="form-control"
+              onChange={this.handleChange} 
+              required/>
+
+            <label htmlFor="title">Password</label>
+            <input 
+              type="password" 
+              placeholder="Enter Password"
               id="password"
               value={password}
-              onChange={this.handleChange}
-            />
+              onChange={this.handleChange} 
+              required/>
+                
+            <button type="submit">Login</button>
+            
           </div>
-          <button type="submit" className="btn btn-success btn-lg">
-            Login
-          </button>
         </form>
       </div>
     );

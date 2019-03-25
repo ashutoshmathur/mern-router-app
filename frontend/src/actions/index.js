@@ -66,11 +66,14 @@ const loginSuccess = data => ({
 });
 
 export const getUserProfile = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(showLoading(true));
 
     const currentUser = getValueFromLocalStore("user");
     console.log("getUserProfile, currentUser:  ", currentUser);
+    console.log("getState: ", getState());
+    const state = getState();
+    const locationPath = state.router.location.pathname;
     if(currentUser) {
       ajaxRequest({
         method:'post',
@@ -96,6 +99,10 @@ export const getUserProfile = () => {
           dispatch(showError(err.message));
           dispatch(showLoading(false));
         });
+    } else {
+      if(locationPath === "/profile") {
+        dispatch(push('/login'));
+      }
     };
   }
 };

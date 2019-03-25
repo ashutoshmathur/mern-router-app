@@ -19,10 +19,16 @@ export default class LandingPage extends Component {
   render() {
     console.log("\n dahboard props:  ", this.props);
     return (
-      <div>
+      <div 
+      id="dashboard" 
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around'
+      }}>
         <h3>Dashboard</h3>
-        <br/>
-        <button onClick={this.onLogoutBtnClick}>
+        <button style={{ maxWidth: '200px' }} onClick={this.onLogoutBtnClick}>
             Logout
         </button>
       </div>
