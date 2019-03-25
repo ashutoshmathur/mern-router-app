@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
-import { sendSignupRequest } from "../actions/index";
+import { sendSignupRequest, getUserProfile } from "../actions/index";
 import LandingPageComponent from "../components/LandingPage";
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendSignupRequest: article => dispatch(sendSignupRequest(article))
+    sendSignupRequest: article => dispatch(sendSignupRequest(article)),
+    getUserProfile: () => dispatch(getUserProfile())
   };
 };
 

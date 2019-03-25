@@ -8,6 +8,6 @@ router.post("/auth/register", UserController.user_registration);
 
 router.post("/auth/login", UserController.user_login);
 
-router.get("/profile", checkAuth, UserController.user_profile);
+router.post("/profile", checkAuth, UserController.user_profile);
 
 module.exports = router;

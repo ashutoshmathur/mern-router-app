@@ -6,6 +6,11 @@ export default class LandingPage extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    console.log("\n landing page componentDidMount, props: ", this.props);
+    this.props.getUserProfile();
+  }
+
   onLoginBtnClick = (event) => {
     event.preventDefault();
     const location = {

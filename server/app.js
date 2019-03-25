@@ -3,7 +3,6 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoutes = require('./api/routes/user');
-const dashboardRoutes = require("./api/routes/dashboard");
 
 const DB_URI = 'mongodb+srv://'+ process.env.MONGODB_ATLAS_USER_NAME + ':'+ process.env.MONGODB_ATLAS_PWD+'@web-cluster-1-ixj9e.mongodb.net/test?retryWrites=true';
 
@@ -30,7 +29,6 @@ app.use((req, res, next) => {
     next();
 });
     
-app.use("/dashboard", dashboardRoutes);
 app.use('/api', userRoutes);
 
 app.use((req, res, next) => {

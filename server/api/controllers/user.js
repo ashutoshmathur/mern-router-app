@@ -110,6 +110,7 @@ exports.user_profile = (req, res, next) => {
       if (user) {
         res.status(200).json({
           user: {
+            userId: user._id,
             email: user.email,
             first_name: user.first_name,
             last_name: user.last_name

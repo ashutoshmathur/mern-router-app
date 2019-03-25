@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
-import { sendLoginRequest } from "../actions/index";
+import { sendLoginRequest, getUserProfile } from "../actions/index";
 import LoginComponent from "../components/Login";
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendLoginRequest: article => dispatch(sendLoginRequest(article))
+    sendLoginRequest: article => dispatch(sendLoginRequest(article)),
+    getUserProfile: () => dispatch(getUserProfile())
   };
 };
 

@@ -9,6 +9,11 @@ export default class Login extends Component {
       password: ""
     };
   }
+
+  componentDidMount() {
+    console.log("\n login componentDidMount, props: ", this.props);
+    this.props.getUserProfile();
+  }
   
   handleChange = (event) => {
     this.setState({ [event.target.id]: event.target.value });

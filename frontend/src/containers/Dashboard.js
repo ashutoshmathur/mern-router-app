@@ -1,5 +1,12 @@
 import { connect } from "react-redux";
+import { getUserProfile } from "../actions/index";
 import DashboardComponent from '../components/Dashboard';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getUserProfile: () => dispatch(getUserProfile())
+  };
+};
 
 const mapStateToProps = (state) => {
   // console.log("state:  ", state)
@@ -10,6 +17,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const Dashboard = connect(mapStateToProps)(DashboardComponent);
+const Dashboard = connect(mapStateToProps, mapDispatchToProps)(DashboardComponent);
 
 export default Dashboard;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { SIGNUP_SUCCESS, LOGIN_SUCCESS, SHOW_LOADING, SHOW_ERROR } from "../constants/action-types";
-import { SIGNUP_URL, LOGIN_URL } from "../constants/url";
+import { SIGNUP_URL, LOGIN_URL, PROFILE_URL } from "../constants/url";
+import { setValueInLocalStore, getValueFromLocalStore } from "../utils/localStore";
 import { push } from 'connected-react-router';
 
 const ajaxRequest = axios.create({
@@ -14,9 +15,10 @@ export const sendSignupRequest = (data) => {
     ajaxRequest
       .post(SIGNUP_URL, data)
       .then(res => {
-        dispatch(showLoading(false));
+        setValueInLocalStore("user", res.data);
         dispatch(signupSuccess(res.data));
         dispatch(push('/login'));
+        dispatch(showLoading(false));
       })
       .catch(err => {
         dispatch(showLoading(false));
@@ -40,9 +42,10 @@ export const sendLoginRequest = (data) => {
       .post(LOGIN_URL, data)
       .then(res => {
         console.log("login res, ", res);
-        dispatch(showLoading(false));
+        setValueInLocalStore("user", res.data);
         dispatch(loginSuccess(res.data));
         dispatch(push('/profile'));
+        dispatch(showLoading(false));
       })
       .catch(err => {
         dispatch(showLoading(false));
@@ -61,6 +64,38 @@ const loginSuccess = data => ({
     userId: data.userId
   }
 });
+
+export const getUserProfile = () => {
+  return dispatch => {
+    dispatch(showLoading(true));
+
+    const currentUser = getValueFromLocalStore("user");
+    console.log("getUserProfile, currentUser:  ", currentUser);
+    
+    ajaxRequest({
+      method:'post',
+      url:PROFILE_URL,
+      data: {
+        email: currentUser.email
+      },
+      headers: {'Authorization': `Bearer ${currentUser.access_token}`}
+    })
+    .then(res => {
+        console.log("user profile res, ", res);
+        if(res.status === 401) {
+          dispatch(push('/login'));
+        } else {
+          dispatch(push('/profile'));  
+        }
+        dispatch(showLoading(false));
+      })
+      .catch(err => {
+        dispatch(push('/login'));
+        dispatch(showError(err.message));
+        dispatch(showLoading(false));
+      });
+  };
+};
 
 const showLoading = (isLoading) => ({
   type: SHOW_LOADING,
