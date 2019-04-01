@@ -22,7 +22,6 @@ export default class Signup extends Component {
   }
   
   render() {
-    console.log("signup props:  " , this.props);
     const { email, password, first_name, last_name } = this.state;
     return (
       <div 

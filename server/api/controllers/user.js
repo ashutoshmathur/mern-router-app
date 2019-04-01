@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 const AUTH_TOKEN_EXPIRATION_DURATION = '30s';
+const REFRESH_TOKEN_EXPIRATION_DURATION = '60s';
+
+const TokenHelper = require('../utils/token');
 
 exports.user_registration = (req, res, next) => {
   User.find({ email: req.body.email })
@@ -30,7 +33,6 @@ exports.user_registration = (req, res, next) => {
             user
               .save()
               .then(result => {
-                console.log(result);
                 res.status(201).json({
                   message: "User created",
                   user: {
@@ -42,7 +44,6 @@ exports.user_registration = (req, res, next) => {
                 });
               })
               .catch(err => {
-                console.log(err);
                 res.status(500).json({
                   error: err
                 });
@@ -57,7 +58,6 @@ exports.user_login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .exec()
     .then(user => {
-      console.log("\n\nuser_login, user:  ", user, "\n\n");
       if (user.length < 1) {
         return res.status(401).json({
           message: "Auth failed"
@@ -70,19 +70,13 @@ exports.user_login = (req, res, next) => {
           });
         }
         if (result) {
-          const access_token = jwt.sign(
-            {
-              email: user.email,
-              userId: user._id
-            },
-            process.env.JWT_KEY,
-            {
-              expiresIn: AUTH_TOKEN_EXPIRATION_DURATION
-            }
-          );
+          const access_token = TokenHelper.createToken('access_token',user);
+          const refresh_token = TokenHelper.createToken('refresh_token', user);
+
           return res.status(200).json({
             message: "Auth successful",
             access_token: access_token,
+            refresh_token: refresh_token,
             email: user.email,
             userId: user._id,
             first_name: user.first_name,
@@ -95,7 +89,6 @@ exports.user_login = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -106,7 +99,6 @@ exports.user_profile = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .exec()
     .then(user => {
-      console.log("\n\nuser_profile, user:  ", user, "\n\n");
       if (user) {
         res.status(200).json({
           user: {
@@ -123,7 +115,6 @@ exports.user_profile = (req, res, next) => {
       }
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });

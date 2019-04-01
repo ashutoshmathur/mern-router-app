@@ -9,7 +9,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = (state) => {
-  // console.log("state:  ", state)
   return {
       user: state.rootReducer.user,
       isLoading: state.rootReducer.isLoading,

@@ -7,7 +7,6 @@ export default class LandingPage extends Component {
   }
 
   componentDidMount() {
-    console.log("\n dashboard componentDidMount, props: ", this.props);
     this.props.getUserProfile();
   }
   
@@ -17,7 +16,6 @@ export default class LandingPage extends Component {
   }
 
   render() {
-    console.log("\n dahboard props:  ", this.props);
     return (
       <div 
       id="dashboard" 

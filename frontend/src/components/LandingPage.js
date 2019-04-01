@@ -8,9 +8,7 @@ export default class LandingPage extends Component {
   }
 
   componentDidMount() {
-    console.log("\n landing page componentDidMount, props: ", this.props);
     const currentUser = getValueFromLocalStore('user');
-    console.log("\n\n currentUser:   ", currentUser);
     if(currentUser) {
       this.props.getUserProfile();
     }
@@ -35,7 +33,6 @@ export default class LandingPage extends Component {
   }
 
   render() {
-    console.log("\n landing page props:  ", this.props);
     return (
       <div style={{
         display: 'flex',

@@ -11,7 +11,7 @@ const App = (props) => (
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Signup} />
-          <Route exact path="/profile" component={Dashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </div>

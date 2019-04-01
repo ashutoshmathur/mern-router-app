@@ -13,7 +13,6 @@ const rootReducer = (state = initialState, action) => {
     case SIGNUP_SUCCESS:
       return { ...state, user: action.payload };
     case LOGIN_SUCCESS:
-      console.log("\n--------\nLOGIN_SUCCESS: ", state, "\n",action.payload)
       return { 
         ...state, 
         user: action.payload

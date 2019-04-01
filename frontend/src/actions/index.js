@@ -41,10 +41,9 @@ export const sendLoginRequest = (data) => {
     ajaxRequest
       .post(LOGIN_URL, data)
       .then(res => {
-        console.log("login res, ", res);
         setValueInLocalStore("user", res.data);
         dispatch(loginSuccess(res.data));
-        dispatch(push('/profile'));
+        dispatch(push('/dashboard'));
         dispatch(showLoading(false));
       })
       .catch(err => {
@@ -70,8 +69,6 @@ export const getUserProfile = () => {
     dispatch(showLoading(true));
 
     const currentUser = getValueFromLocalStore("user");
-    console.log("getUserProfile, currentUser:  ", currentUser);
-    console.log("getState: ", getState());
     const state = getState();
     const locationPath = state.router.location.pathname;
     if(currentUser) {
@@ -81,15 +78,17 @@ export const getUserProfile = () => {
         data: {
           email: currentUser.email
         },
-        headers: {'Authorization': `Bearer ${currentUser.access_token}`}
+        headers: {
+          'Authorization': `Bearer ${currentUser.access_token}`,
+          'x-refresh-token': `Bearer ${currentUser.refresh_token}`
+        }
       })
       .then(res => {
-          console.log("user profile res, ", res);
           if(res.status === 401) {
             deleteValueFromLocalStore("user");
             dispatch(push('/login'));
           } else {
-            dispatch(push('/profile'));  
+            dispatch(push('/dashboard'));  
           }
           dispatch(showLoading(false));
         })
@@ -100,7 +99,7 @@ export const getUserProfile = () => {
           dispatch(showLoading(false));
         });
     } else {
-      if(locationPath === "/profile") {
+      if(locationPath === "/dashboard") {
         dispatch(push('/login'));
       }
     };
@@ -110,7 +109,6 @@ export const getUserProfile = () => {
 export const logoutUser = () => {
   return dispatch => {
     deleteValueFromLocalStore("user");
-    console.log("logoutUser, user: ", getValueFromLocalStore("user"));
     dispatch(push('/login'));
   }
 };
